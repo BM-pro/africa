@@ -1,0 +1,161 @@
+/* ========== Brand Variables ========== */
+:root {
+  --boa-primary: #00BDBB;    /* Main turquoise */
+  --boa-light: #ffffff;      /* White */
+  --boa-dark: #222222;       /* Dark text */
+  --boa-accent-orange: #FD7400;  /* Optional accent */
+  --boa-accent-aqua: #2DBEB1;    /* Hover accent */
+  --font-main: 'Tajawal', 'Cairo', 'Noto Sans Arabic', sans-serif;
+}
+
+/* ========== Global ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--boa-light);
+  color: var(--boa-dark);
+  line-height: 1.8;
+  direction: rtl;
+}
+
+/* ========== Header ========== */
+.logo-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: var(--boa-primary);
+}
+.logo {
+  max-height: 60px;
+}
+
+/* ========== Main Promo Section ========== */
+.promo-section {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.main-title {
+  font-size: 2rem;
+  color: var(--boa-dark);
+}
+.main-title .highlight {
+  color: var(--boa-primary);
+}
+
+.subtitle {
+  margin: 0.5rem 0 1.5rem;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.card-image {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.card-image img {
+  width: 180px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.promo-text {
+  font-size: 1rem;
+  margin: 1rem 0;
+  line-height: 1.8;
+  color: #333;
+}
+.bullet {
+  color: var(--boa-primary);
+  font-size: 1.2rem;
+}
+
+/* ========== Form ========== */
+.simple-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.form-icon {
+  display: block;
+  margin: 0 auto 1rem;
+  max-width: 80px;
+  border-radius: 50%;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--boa-dark);
+}
+
+input, select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: var(--font-main);
+  font-size: 1rem;
+}
+
+input:focus, select:focus {
+  border-color: var(--boa-primary);
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,189,187,0.4);
+}
+
+.horizontal-selects .select-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bank-image {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 1rem 0;
+}
+
+/* ========== Buttons ========== */
+.confirm-btn {
+  background-color: var(--boa-primary);
+  color: var(--boa-light);
+  font-size: 1.2rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.confirm-btn:hover {
+  background-color: var(--boa-accent-aqua);
+}
+
+/* ========== Footer ========== */
+.site-footer {
+  background: var(--boa-primary);
+  text-align: center;
+  padding: 1rem;
+  color: var(--boa-light);
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
