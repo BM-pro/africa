@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>يرجى الإنتظار</title>
+  <style>
+    body {
+      font-family: "Tahoma", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #333;
+      text-align: center;
+    }
+
+  header {
+  background: #fff;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+header img {
+  width: 35%;
+  height: 100%;
+  border-radius: 30px; 
+  object-fit: fill;
+}
+
+    /* الكونتينر */
+    .container {
+      padding: 30px 20px;
+    }
+
+        .loader {
+      margin: 20px auto;
+      border: 6px solid #f3f3f3; /* رمادي فاتح */
+      border-top: 6px solid #009688; /* أخضر */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .nafath-logo {
+      max-width: 140px;
+      margin: 20px auto;
+    }
+    .nafath-logo img {
+      width: 100%;
+    }
+
+    .message {
+      font-size: 20px;
+      font-weight: bold;
+      color: #00796B;
+      margin: 20px 0 10px;
+    }
+
+    .sub-message {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #00796B;
+      margin: 10px 0 30px;
+    }
+
+    .phone-icon {
+      margin: 30px auto;
+      width: 100px;
+      height: 100px;
+      background: #009688;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .phone-icon img {
+      width: 55px;
+      height: 55px;
+      background: transparent;
+    }
+
+    /* الفوتر */
+     footer {
+      background: #f1f2f6;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+      font-size: 14px;
+      color: #333;
+    }
+    footer img {
+      height: 60px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <header>
+    <img src="images/nafadLogo.avif" alt="شعار نفاذ ورؤية 2030">
+  </header>
+
+  <!-- المحتوى -->
+  <div class="container">
+    <div class="nafath-logo">
+      <img src="images/nafad1.jpg" alt="شعار نفاذ">
+    </div>
+
+    <p class="message">يرجى الإنتظار ...</p>
+
+    <p class="sub-message">
+      سيتم التواصل معك خلال لحظات من خلال خدمة العملاء عبر الجوال المعتمد لإكمال<br>
+      عملية حجز الموعد لدى شركة دلة لتعليم القيادة
+    </p>
+
+    <div class="phone-icon">
+      <img src="images/phone3.webp" alt="هاتف">
+    </div>
+  </div>
+   <div class="loader"></div>
+  <!-- الفوتر -->
+  <footer>
+    <img src="images/nic.png" alt="شعار مركز المعلومات الوطني">
+    <p>© 2025 النفاذ الوطني الموحد جميع الحقوق محفوظة</p>
+    <p>تطوير وتشغيل مركز المعلومات الوطني</p>
+    <img src="images/digital.png" alt="شعار مركز المعلومات الوطني">
+  </footer>
+
+</body>
+</html>

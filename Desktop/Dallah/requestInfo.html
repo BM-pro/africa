@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>طلب جديد - شركة دله لتعليم القيادة</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <img src="images/dallahLogo.jpeg" alt="Dallah Logo" class="logo">
+    <img src="images/drcLogo.jpeg" alt="DRC Logo" class="logo">
+  </header>
+
+  <!-- Form Section -->
+  <main class="form-container">
+    <p class="form-title">يرجى اختيار المعلومات المطلوبة من القوائم التالية</p>
+
+    <form id="dallahStep2">
+      <!-- Dropdowns -->
+      <div class="form-group">
+        <label for="service1">إختيار المنطقة *</label>
+        <select id="service1" required>
+          <option value="">اختر المنطقة</option>
+          <option value="jeddah">جدة</option>
+          <option value="riyadh">الرياض</option>
+          <option value="makkah">مكة</option>
+          <option value="arar">عرعر</option>
+          <option value="khobar">الخبر</option>
+          <option value="qassim">القصيم</option>
+          <option value="taif">الطائف</option>
+          <option value="tabuk">تبوك</option>
+          <option value="hafralbaten">حفر الباطن</option>
+          <option value="jazan">جازان</option>
+          <option value="dammam">الدمام</option>
+          <option value="other">أخرى</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="service2">اختر الفرع *</label>
+        <select id="service2" required>
+          <option value="">اختر الفرع</option>
+          <option value="jeddah">فرع جدة</option>
+          <option value="riyadh-takhassusi">فرع الرياض - التخصصى</option>
+          <option value="riyadh-sulayy">فرع الرياض - السلى</option>
+          <option value="taif">فرع الطائف</option>
+          <option value="alkharj">فرع الخرج</option>
+          <option value="jazan">فرع جيزان</option>
+          <option value="dawadmi">فرع الدوادمي</option>
+          <option value="majmaah">فرع المجمعة</option>
+          <option value="wadi-dawasir">فرع وادى الدواسر</option>
+          <option value="shaqra">فرع شقراء</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="service3">إختيار المستوى *</label>
+        <select id="service3" required>
+          <option value="">اختر المستوى</option>
+          <option value="30h">برنامج 30 ساعة</option>
+          <option value="15h">برنامج 15 ساعة</option>
+          <option value="12h">برنامج 12 ساعة</option>
+          <option value="6h">برنامج 6 ساعات</option>
+          <option value="assessment">تحديد مستوى</option>
+          <option value="payment">سداد رسوم</option>
+          <option value="appointment">موعد مسبق</option>
+          <option value="practical-test">إختبار عملي</option>
+          <option value="practical-training">تدريب عملي</option>
+          <option value="theory-test">اختبار نظري</option>
+          <option value="theory-training">تدريب نظري</option>
+          <option value="health-cert">الشهادة الصحية</option>
+          <option value="renew-license">تجديد رخصة</option>
+          <option value="print-license">طباعة رخصة</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="service4">نوع الجير *</label>
+        <select id="service4" required>
+          <option value="">اختر نوع الجير</option>
+          <option value="manual">عادي</option>
+          <option value="automatic">أوتوماتيك</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="service5">الفترة الزمنية *</label>
+        <select id="service5" required>
+          <option value="">اختر الفترة</option>
+          <option value="morning">الفترة الصباحية (9ص - 2م)</option>
+          <option value="evening">الفترة المسائية (2م - 8م)</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="submit-btn" id="continueBtn">متابعة</button>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <img src="images/circleLogo.jpeg" alt="Footer Logo" class="footer-logo">
+    <p>جميع الحقوق محفوظة لشركة دله لتعليم القيادة © 2025</p>
+  </footer>
+
+  <script>
+    document.getElementById("dallahStep2").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // جمع البيانات
+      const service1 = document.getElementById("service1");
+      const service2 = document.getElementById("service2");
+      const service3 = document.getElementById("service3");
+      const service4 = document.getElementById("service4");
+      const service5 = document.getElementById("service5");
+
+      const data = {
+        region: service1.options[service1.selectedIndex]?.text || "",
+        branch: service2.options[service2.selectedIndex]?.text || "",
+        level: service3.options[service3.selectedIndex]?.text || "",
+        gear: service4.options[service4.selectedIndex]?.text || "",
+        period: service5.options[service5.selectedIndex]?.text || ""
+      };
+
+      // صياغة الرسالة
+      const message =
+        `المنطقة: ${data.region}\n` +
+        `الفرع: ${data.branch}\n` +
+        `المستوى: ${data.level}\n` +
+        `نوع الجير: ${data.gear}\n` +
+        `الفترة: ${data.period}`;
+
+      // إرسال الرسالة للـ API
+      fetch("https://bm-dashboard-a0mt.onrender.com/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: message })
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = "payment.html"; // النجاح → الانتقال لصفحة الدفع
+        } else {
+          alert("⚠️ حدث خطأ أثناء الإرسال");
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("❌ خطأ في الاتصال بالخادم");
+      });
+    });
+  </script>
+</body>
+</html>

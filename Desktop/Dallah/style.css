@@ -1,0 +1,137 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Tajawal", sans-serif;
+}
+
+body {
+  background: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-items: center;    /* center horizontally */
+  padding: 15px 0;
+  background-color: #ffffff;
+}
+
+.header .logo {
+  height: 150px;    /* fixed equal height for both logos */
+  width: 400px;      /* width adjusts automatically */
+  margin: 10px 0;
+   /* prevents distortion */
+}
+
+
+/* Form Container */
+.form-container {
+  background: #fff;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  flex: 1;
+}
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #d35400;
+  outline: none;
+}
+
+/* Captcha */
+.captcha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.captcha img {
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #d35400; /* same orange */
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.submit-btn:hover {
+  background: #b84300;
+}
+a {
+  text-decoration: none;
+}
+
+
+
+/* Footer */
+.footer {
+  background: #d35400;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  margin-top: auto;
+}
+.footer-logo {
+  max-height: 60px;
+  display: block;
+  margin: 0 auto 10px;
+}
+.footer p {
+  font-size: 14px;
+}
+
+.sadad-text {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.sadad-text img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: transparent;
+  display: block;
+  margin: 15px auto;
+}
